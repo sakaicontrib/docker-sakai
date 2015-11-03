@@ -1,0 +1,55 @@
+# fig file
+# This sets up WebLearn(Sakai) for a developer, so it runs with the debugger enabled and shouldn't allocate as much
+# resources as we use in production.
+# It exposes the webserver publicly, but all the developer services (mysql, debug port, jmx) just on localhost.
+#
+app:
+  build: ../tomcat
+  # If you want to test the production image swap the previous line with this one.
+  #image: sakaiproject/sakai
+
+
+
+  # Not too sure about this as there seem to be IO errors with using volumes like
+  # this, eg corrupt files and missing files.
+  # We use the sakai.properties from the production build
+  volumes:
+   - ./tomcat/lib:/opt/tomcat/sakai-lib
+   - ./tomcat/components:/opt/tomcat/components
+   - ./tomcat/webapps:/opt/tomcat/webapps
+   - ./placeholder.properties:/opt/tomcat/sakai/placeholder.properties
+   - ./sakai.quartz.properties:/opt/tomcat/sakai/sakai.quartz.properties
+   - ./log4j.properties:/opt/tomcat/sakai/log4j.properties
+   - ./local.properties:/opt/tomcat/sakai/local.properties
+   - /opt/tomcat/sakai/files
+   - /opt/tomcat/sakai/deleted
+  command: /opt/tomcat/bin/catalina.sh jpda run
+# command: /opt/tomcat/bin/startup_with_yjp.sh 
+  links:
+   - db
+# Uncomment if you want to use mailcatcher
+#  - smtp
+# If you want to use docker-compose scale on the app it should work, but you will need to
+# have docker pick random ports and so change all these lines to be just a single
+# port number.
+  ports:
+   - "8080:8080"
+   - "127.0.0.1:8000:8000"
+   - "127.0.0.1:8009:8009"
+   - "127.0.0.1:5400:5400"
+   - "127.0.0.1:8025:8025"
+
+# We're using our own image so that we can set the default character encoding.
+# The standard MySQL image doesn't allow this.
+# The standard dockerfile/mysql image doesn't allow autocation of user/db
+db:
+  build: ../mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: 
+    MYSQL_USER: sakai
+    MYSQL_PASSWORD: sakai
+    MYSQL_DATABASE: sakai
+    MYSQL_DATABASE_SPEC: DEFAULT CHARACTER SET = `utf8`
+  # We expose the port so that clients outside docker can connect
+  ports:
+   - "127.0.0.1:3306:3306"

@@ -1,0 +1,5 @@
+# If you deploy WARs to this tomcat but then want to build an image without the unpacked
+# contents uncomment the next 2 lines
+#
+# tomcat/webapps/*
+# !tomcat/webapps/*.war
