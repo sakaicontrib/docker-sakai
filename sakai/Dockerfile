@@ -9,7 +9,8 @@ COPY tomcat/components /opt/tomcat/components/
 COPY tomcat/lib /opt/tomcat/sakai-lib/
 COPY tomcat/webapps /opt/tomcat/webapps/
 
-COPY local.properties log4j.properties placeholder.properties sakai.quartz.properties /opt/tomcat/sakai/
+# We don't copy local.properties for production
+COPY  log4j.properties placeholder.properties sakai.quartz.properties /opt/tomcat/sakai/
 
 # Up the memory for production
 ENV CATALINA_OPTS_MEMORY -Xms2g -Xmx3g
