@@ -32,7 +32,7 @@ if su sakai -c "test \! -w /opt/tomcat/logs" ; then
 fi
 # If we have a log4j.properties link it into the classpath
 if [ -f /opt/tomcat/sakai/log4j.properties ] ; then
-        ln -s /opt/tomcat/sakai/log4j.properties /opt/tomcat/lib/log4j.properties
+        ln -fs /opt/tomcat/sakai/log4j.properties /opt/tomcat/lib/log4j.properties
 fi
 
 # If we want to listen on a specific IP
