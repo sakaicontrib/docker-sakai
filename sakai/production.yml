@@ -1,0 +1,15 @@
+# This builds an image for production
+app:
+  extends:
+    file: common.yml
+    service: app
+  build: .
+
+  command: /opt/tomcat/bin/catalina.sh run
+  links:
+   - db
+
+db:
+  extends:
+    file: common.yml
+    service: db
