@@ -6,14 +6,21 @@ This is a selection of docker images and fig setups for developing/deploying Sak
 Layout
 ======
 
-tomcat - This is an Docker image ready for a copy of Sakai. It containts Java and Tomcat.
-sakai - This is a development fig setup for Sakai.
+tomcat - This is an Docker image ready for a copy of Sakai. It containts Java and Tomcat. This image 
+available from the Docker Hub as https://hub.docker.com/r/buckett/sakai-tomcat/
+sakai - This is the main docker and docker-compose folder
 mysql - This is a Docker image containing MySQL.
 
 Development
 ===========
 
 With your source checkout of Sakai build it and deploy it into the folder `sakai/tomcat`
+
+```
+cd sakai/checkout
+mvn install sakai:deploy -Dmaven.tomcat.home=/home/user/sakai/docker/sakai/tomcat
+```
+
 Once it's deployed bring up the application and supporting services:
 ```
 cd sakai
@@ -45,12 +52,11 @@ Production
 With your source checkout of Sakai build it it and deploy it into the foler `sakai/tomcat`
 Once it's deployed you need to build the docker image:
 ```
-docker build -t sakaiproject/tomcat tomcat
-docker build -t buckett/sakai sakai
+docker build -t username/sakai sakai
 ```
 Then to send the image to the hosting team push the image to the docker registry
 ```
-docker push buckett/sakai
+docker push username/sakai
 ```
 
 Sakai Configuration

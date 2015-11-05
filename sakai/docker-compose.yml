@@ -3,7 +3,7 @@ app:
   extends:
     file: common.yml
     service: app
-  build: ../tomcat
+  image: buckett/sakai-tomcat
 
   # Not too sure about this as there seem to be IO errors with using volumes like
   # this, eg corrupt files and missing files.

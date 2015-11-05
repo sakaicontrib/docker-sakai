@@ -2,7 +2,7 @@
 # It copies a build of Sakai ontop of the sakai tomcat
 #
 
-FROM sakaiproject/tomcat
+FROM buckett/sakai-tomcat
 
 # Copy all the files in
 COPY tomcat/components /opt/tomcat/components/
