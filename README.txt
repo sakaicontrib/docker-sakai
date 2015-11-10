@@ -1,7 +1,7 @@
 docker/docker-compose
 ==========
 
-This is a selection of docker images and fig setups for developing/deploying Sakai.
+This is a selection of docker images and docker-compose setups for developing/deploying Sakai.
 
 Layout
 ======
@@ -10,6 +10,25 @@ tomcat - This is an Docker image ready for a copy of Sakai. It containts Java an
 available from the Docker Hub as https://hub.docker.com/r/buckett/sakai-tomcat/
 sakai - This is the main docker and docker-compose folder
 mysql - This is a Docker image containing MySQL.
+
+Setup
+=====
+
+If you are on Linux then you should install docker and docker-compose, if you're on Windows or Mac then 
+you should install the Docker Toolbox. If you're using the Docker Toolbox you then need to create you're 
+virtual machine and because Sakai has large memory requirements you should increase the default resources
+allocated to it as long as your host has sufficient resources. This allocates 2GB and 2 CPUs.
+
+```
+export VIRTUALBOX_CPU_COUNT="2"
+export VIRTUALBOX_MEMORY_SIZE="2048"
+```
+
+then create the VM and setup docker to use this VM:
+```
+docker-machine create -d virtualbox dev
+eval $(docker-machine env dev)
+```
 
 Development
 ===========
