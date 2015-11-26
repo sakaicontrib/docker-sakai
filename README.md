@@ -9,7 +9,6 @@ Layout
 tomcat - This is an Docker image ready for a copy of Sakai. It containts Java and Tomcat. This image 
 available from the Docker Hub as https://hub.docker.com/r/buckett/sakai-tomcat/
 sakai - This is the main docker and docker-compose folder
-mysql - This is a Docker image containing MySQL.
 
 Setup
 =====

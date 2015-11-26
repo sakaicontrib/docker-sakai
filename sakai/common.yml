@@ -32,13 +32,15 @@ app:
 # The standard MySQL image doesn't allow this.
 # The standard dockerfile/mysql image doesn't allow autocation of user/db
 db:
-  build: ../mysql
+  image: mysql:5.6.27
   environment:
     MYSQL_ROOT_PASSWORD: 
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     MYSQL_USER: sakai
     MYSQL_PASSWORD: sakai
     MYSQL_DATABASE: sakai
-    MYSQL_DATABASE_SPEC: DEFAULT CHARACTER SET = `utf8`
+  command:
+   - --character-set-server=utf8
   # We expose the port so that clients outside docker can connect
   ports:
    - "127.0.0.1:3306:3306"
