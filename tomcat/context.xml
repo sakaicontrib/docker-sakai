@@ -1,6 +1,7 @@
 <Context>
     <JarScanner>
         <!-- This is to speedup startup so that tomcat doesn't scan as much -->
-        <JarScanFilter defaultPluggabilityScan="false" defaultTldScan="false" />
+	<!-- defaultTldScan="false" breaks some JSF tools (calendar-summary) -->
+        <JarScanFilter defaultPluggabilityScan="false" />
     </JarScanner>
 </Context>
