@@ -17,6 +17,9 @@ app:
    - ./log4j.properties:/opt/tomcat/sakai/log4j.properties
    - ./local.properties:/opt/tomcat/sakai/local.properties
   command: /opt/tomcat/bin/catalina.sh jpda run
+  environment:
+   # In development this means we can read files without anything special
+   SAKAI_USER: root
   links:
    - db
 
