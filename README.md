@@ -32,6 +32,8 @@ eval $(docker-machine env dev)
 Development
 ===========
 
+If you're on Windows of Mac make sure that you have your Sakai deployment inside you're home folder as by default docker machine will only make those folders available to a docker container.
+
 With your source checkout of Sakai build it and deploy it into the folder `sakai/tomcat`
 
 ```
@@ -91,4 +93,6 @@ Notes
 =====
 
 Generally put stuff in /opt/* and put scripts that are used by docker in /opt/scripts (should be more unixy and change to /opt/bin)
+
+If the files don't seem to be appearing inside the docker container make sure your working inside your home folder.
 
