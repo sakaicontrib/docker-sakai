@@ -15,6 +15,11 @@ WORKDIR /tmp
 RUN groupadd --gid 10000 sakai && \
   useradd --uid 10000 --gid 10000 --system sakai 
 
+# The 1024 bit root CAs are no longer in Debian (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=812708)
+# and the cross signing isn't working in older versions of openssl
+COPY thawte_Premium_Server_CA.pem /usr/local/share/ca-certificates/thawte_permium_server_ca.crt
+RUN update-ca-certificates
+
 # Need to get the tomcat binary and unpack
 RUN mkdir -p /opt/tomcat && \
   # We don't use the main mirror as otherwise it stops working once newer versions are released.
